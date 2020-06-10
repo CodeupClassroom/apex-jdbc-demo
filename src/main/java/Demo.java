@@ -14,10 +14,18 @@ public class Demo {
             );
 
             Statement statement = connection.createStatement();
-            ResultSet rs = statement.executeQuery("show databases");
+            ResultSet rs = statement.executeQuery("SELECT * FROM albums");
 
             while(rs.next()){
-                System.out.println("rs.getString(\"Database\") = " + rs.getString("Database"));
+                // We can use indexes to get values from the rs
+                System.out.println(rs.getLong(1));
+                System.out.println(rs.getString(2));
+                System.out.println(rs.getString(3));
+                // We can use column labels to get values from the rs
+                System.out.println(rs.getInt("release_date"));
+                System.out.println(rs.getDouble("sales"));
+                System.out.println(rs.getString("genre"));
+                System.out.println("--------");
             }
 
         } catch (SQLException throwables) {
